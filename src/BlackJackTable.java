@@ -66,6 +66,7 @@ public class BlackJackTable implements Table {
                 shuffle.giveOneCard(player, 0);
             }
             for (BlackJackPlayer player : players) {
+            	print(player);
                 int a = player.makeBet();
                 if (a == Config.NOENOUGHMONEY) {
                     if (!delete.contains(player))
@@ -114,7 +115,7 @@ public class BlackJackTable implements Table {
                         player.endGame(check.checkWin(player, dealer, i), dealer);
                 printMoney();
                 List<BlackJackPlayer> temp = new ArrayList<>();
-                for (BlackJackPlayer player : playing) {
+                for (BlackJackPlayer player : players) {
                     System.out.print(player.getNickName() + ", do you want to play another game? ");
                     char c = Utils.yesOrNo();
                     if (c != 'y' && c != 'Y') {
