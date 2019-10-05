@@ -81,6 +81,7 @@ public class BlackJackTable implements Table {
                 }
                 else {
                     playing.add(player);
+                    shuffle.giveNewCard(player);
                 }
             }
             for (BlackJackPlayer player : playing) {
