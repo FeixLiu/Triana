@@ -18,6 +18,9 @@ public class Config {
 	public static final int CARDRANGE = 13;
 	public static final String[] SUITS = {"Diamond", "Plum", "Heart", "Spade"};
 	public static final String[] NUMBERS = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+	
+	public static final int PLAYER = 0;
+	public static final int BANKER = 1;
 
 	public static final int DEFAULTMONEY = 200;
 }
