@@ -41,7 +41,7 @@ public class CardPlayer extends Person{
 		
 	}
 	
-	public void printHandCard() {
+	public void printHandCard(boolean printAll) {
 		for(int i = 0; i < handCard.size(); i++) {
 			List<Card> cards = handCard.get(i).getCards();
 			if(handCard.size() == 1) {
@@ -51,8 +51,12 @@ public class CardPlayer extends Person{
 				System.out.print(super.getName() + "'s handcards " + (i+1) + ": ");
 			}
 			
-			for(Card card : cards) {
-				System.out.print("(" + card.getSuit() + ")" + card.getNumber() + " ");
+			for(int j = 0; j < cards.size(); j++) {
+				if(j == 0 && !printAll) {
+					System.out.print("* ");
+					continue;
+				}
+				System.out.print("(" + cards.get(j).getSuit() + ")" + cards.get(j).getNumber() + " ");
 			}
 			System.out.println();
 		}

@@ -7,16 +7,13 @@ public class BlackJackPlayer extends CardPlayer{
 	private int total = 1;
 	private List<Bet> bet = new ArrayList<Bet>();
 	private Wallet wallet = new Wallet();
-	
+	private int role;
 	
 	public BlackJackPlayer() {}
 	
-	public BlackJackPlayer(String name) {
+	public BlackJackPlayer(String name, int role, int money) {
 		super(name);
-	}
-	
-	public BlackJackPlayer(String name, int money) {
-		super(name);
+		this.role = role;
 		wallet.setWallet(money);
 	}
 	
@@ -63,6 +60,10 @@ public class BlackJackPlayer extends CardPlayer{
 		System.out.println(wallet.getMoney());
 	}
 	
+	public void switchRole() {
+		this.role = Math.abs(this.role - 1);
+	}
+	
 	public int takeAction(){
 		//for the index hand of card, take the action(hit, stand, split, double up)
 		System.out.println("========================================");
@@ -75,15 +76,12 @@ public class BlackJackPlayer extends CardPlayer{
 
 		System.out.println(Config.HITACTION + " Hit.");
 		System.out.println(Config.STANDACTION+ " Stand.");
-		System.out.println(Config.SPLITACTION + " Split.");
-		System.out.println(Config.DOUBLEACTION + " Double up.");
 		
 		int currentMoney = wallet.getMoney();
 		
 		while(true) {
 			int action = Utils.getNumberFromPlayer();
-			while (action != Config.HITACTION && action != Config.STANDACTION
-					&& action != Config.SPLITACTION && action != Config.DOUBLEACTION) {
+			while (action != Config.HITACTION && action != Config.STANDACTION) {
 				System.out.print("Please choose a correct action: ");
 				action = Utils.getNumberFromPlayer();
 			}
