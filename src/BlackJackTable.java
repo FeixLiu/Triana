@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class BlackJackTable implements Table {
@@ -52,6 +54,7 @@ public class BlackJackTable implements Table {
         List<BlackJackPlayer> playing = new ArrayList<>();
         List<BlackJackPlayer> delete = new ArrayList<>();
         while (flag && players.size() != 0) {
+            printMoney();
             dealer.deleteHandCard();
             for (BlackJackPlayer player : players) {
                 player.deleteHandCard();
@@ -59,11 +62,11 @@ public class BlackJackTable implements Table {
             playerNum = players.size();
             shuffle.newShuffle();
             shuffle.giveOneCard(dealer,0);
-            dealer.printHandCard(true);
             for (BlackJackPlayer player : players) {
                 shuffle.giveOneCard(player, 0);
             }
             for (BlackJackPlayer player : players) {
+                dealer.printHandCard(true);
                 for (BlackJackPlayer other : players) {
                     if (player.equals(other))
                         other.printHandCard(true);
@@ -112,7 +115,7 @@ public class BlackJackTable implements Table {
                     player.printHandCard(true);
                 for (BlackJackPlayer player : playing)
                     for (int i = 0; i < player.getHandCard().size(); i++)
-                        player.endGame(check.checkWin(player, dealer, i));
+                        player.endGame(check.checkWin(player, dealer, i), dealer);
                 List<BlackJackPlayer> temp = new ArrayList<>();
                 for (BlackJackPlayer player : playing) {
                     System.out.print(player.getNickName());
@@ -128,16 +131,64 @@ public class BlackJackTable implements Table {
                     players.remove(out);
             }
             playing.clear();
+            printMoney();
+            changeRole();
         }
         if (playerNum > 0)
             printResult();
+    }
+
+    private void printMoney() {
+        System.out.println("Dealer's money: " + dealer.getWallet().getMoney());
+        for (BlackJackPlayer p : players)
+            System.out.println(p.getNickName() + "'s money: " + p.getWallet().getMoney());
+    }
+
+    private void changeRole() {
+        List<BlackJackPlayer> more = new ArrayList<>();
+        int banker = dealer.getWallet().getMoney();
+        for (BlackJackPlayer player : players) {
+            if (player.getWallet().getMoney() > banker)
+                more.add(player);
+        }
+        if (more.size() == 0)
+            return;
+        else {
+            more.sort((o1, o2) -> {
+                if (o1.getWallet().getMoney() > o2.getWallet().getMoney())
+                    return 1;
+                else if (o1.getWallet().getMoney() == o2.getWallet().getMoney())
+                    return 0;
+                return -1;
+            });
+        }
+        for (BlackJackPlayer p : more) {
+            System.out.println(p.getNickName() + " do you want to be a banker? ");
+            char c = Utils.yesOrNo();
+            if (c == 'y' || c == 'Y') {
+                p.switchRole();
+                dealer.switchRole();
+                players.add(dealer);
+                dealer = p;
+                players.remove(p);
+                return;
+            }
+        }
+        int a = (int)(Math.random() * more.size());
+        BlackJackPlayer p = more.get(a);
+        System.out.println(p.getNickName() + " you are chosen to be a banker ramdonly.");
+        p.switchRole();
+        dealer.switchRole();
+        players.add(dealer);
+        dealer = p;
+        players.remove(p);
     }
 
     private boolean hitAction(BlackJackPlayer player) {
         shuffle.giveOneCard(player, player.getWhich());
         print(player);
         if (check.checkBust(player, player.getWhich())) {
-            player.endGame(Config.BUST);
+            player.endGame(Config.BUST, dealer);
             return !player.isOver();
         }
         return true;
