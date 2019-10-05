@@ -199,6 +199,7 @@ public class BlackJackTable implements Table {
 
     private void print(BlackJackPlayer p) {
         //give one card to the player and then print the hand cards
+    	System.out.println("========================================");
         dealer.printHandCard(true);
         for (BlackJackPlayer other : players) {
             if (p.equals(other))
@@ -206,6 +207,7 @@ public class BlackJackTable implements Table {
             else
                 other.printHandCard(false);
         }
+        System.out.println("========================================");
     }
 
     private int standAction(BlackJackPlayer p) {

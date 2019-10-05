@@ -151,7 +151,7 @@ public class BlackJackPlayer extends CardPlayer{
 			return Config.NOENOUGHMONEY;
 		}
 		
-		System.out.print(super.getNickName() + ", do you want to make bet?");
+		System.out.print(super.getNickName() + ", do you want to make bet? ");
 		char res = Utils.yesOrNo();
 		if(res != 'y' && res != 'Y') {
 			return Config.NOTMAKEBET;
