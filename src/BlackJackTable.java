@@ -8,6 +8,7 @@ public class BlackJackTable implements Table {
     private BlackJackPlayer dealer;
     private int playerNum;
     private boolean computer;
+    private boolean flag;
 
     public BlackJackTable() {
     	System.out.println("Welcome to the BlackJack game.");
@@ -24,6 +25,7 @@ public class BlackJackTable implements Table {
         shuffle = new Shuffle(Config.CARDSET);
         check = new BlackJackRules();
         String str;
+        // random banker
         while (playerNum > 0) {
             System.out.print("The information of player " + (all - playerNum + 1) + ". ");
             str = Utils.getName("player");
@@ -37,30 +39,39 @@ public class BlackJackTable implements Table {
             System.out.println("See you");
         }
         computer = false;
+        flag = true;
     }
 
     public void playGame() {
         // the body of the game, ask the player for its choice and ask the checker check whether the player bust or not for each round
-        while (players.size() != 0) {
+        List<BlackJackPlayer> playing = new ArrayList<>();
+        List<BlackJackPlayer> delete = new ArrayList<>();
+        while (flag && players.size() != 0) {
             playerNum = players.size();
-            for (BlackJackPlayer player : players) {
-                player.initTotal();
-                player.initWhich();
-            }
-            shuffle.giveNewCard(dealer);
             shuffle.newShuffle();
-            List<BlackJackPlayer> delete = new ArrayList<>();
+            shuffle.giveOneCard(dealer,0);
+            dealer.printHandCard(true);
             for (BlackJackPlayer player : players) {
-                if (!player.makeBet()) {
+                shuffle.giveOneCard(player, 0);
+            }
+            for (BlackJackPlayer player : players) {
+                for (BlackJackPlayer other : players) {
+                    if (player.equals(other))
+                        other.printHandCard(true);
+                    else
+                        other.printHandCard(false);
+                }
+                if (player.makeBet() == Config.NOENOUGHMONEY) {
                     if (!delete.contains(player))
                         delete.add(player);
                     if (delete.size() == players.size())
                         break;
-                    continue;
                 }
-                shuffle.giveNewCard(player);
-                dealer.printHandCard();
-                player.printHandCard();
+                else {
+                    playing.add(player);
+                }
+            }
+            for (BlackJackPlayer player : playing) {
                 while (true) {
                     int action = player.takeAction();
                     if (action == Config.HITACTION) {
@@ -86,29 +97,28 @@ public class BlackJackTable implements Table {
             players.removeAll(delete);
             delete.clear();
             if (players.size() != 0) {
-                if (!computer)
-                    shuffle.keepGive(dealer);
-                dealer.printHandCard();
-                for (BlackJackPlayer player : players)
-                    player.printHandCard();
-                for (BlackJackPlayer player : players) {
-                    player.initWhich();
+                shuffle.keepGive(dealer);
+                dealer.printHandCard(true);
+                for (BlackJackPlayer player : playing)
+                    player.printHandCard(true);
+                for (BlackJackPlayer player : playing)
                     for (int i = 0; i < player.getHandCard().size(); i++)
                         player.endGame(check.checkWin(player, dealer, i));
-                }
                 List<BlackJackPlayer> temp = new ArrayList<>();
-                for (BlackJackPlayer player : players) {
+                for (BlackJackPlayer player : playing) {
                     System.out.print(player.getName());
-                    char c = Utils.nextGame();
-                    if (c == 'y' || c == 'Y')
+                    System.out.print("Do you want to play another game? ");
+                    char c = Utils.yesOrNo();
+                    if (c != 'y' && c != 'Y') {
                         temp.add(player);
-                    else {
                         System.out.print(player.getName() + "'s balance in wallet is: ");
                         System.out.println(player.getWallet().getMoney());
                     }
                 }
-                players = temp;
+                for (BlackJackPlayer out : temp)
+                    players.remove(out);
             }
+            playing.clear();
         }
         if (playerNum > 0)
             printResult();
