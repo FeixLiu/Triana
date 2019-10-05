@@ -84,6 +84,13 @@ public class BlackJackTable implements Table {
                 }
             }
             for (BlackJackPlayer player : playing) {
+                dealer.printHandCard(true);
+                for (BlackJackPlayer other : players) {
+                    if (player.equals(other))
+                        other.printHandCard(true);
+                    else
+                        other.printHandCard(false);
+                }
                 while (true) {
                     int action = player.takeAction();
                     if (action == Config.HITACTION) {
