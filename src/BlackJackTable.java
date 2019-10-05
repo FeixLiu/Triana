@@ -66,13 +66,6 @@ public class BlackJackTable implements Table {
                 shuffle.giveOneCard(player, 0);
             }
             for (BlackJackPlayer player : players) {
-                dealer.printHandCard(true);
-                for (BlackJackPlayer other : players) {
-                    if (player.equals(other))
-                        other.printHandCard(true);
-                    else
-                        other.printHandCard(false);
-                }
                 int a = player.makeBet();
                 if (a == Config.NOENOUGHMONEY) {
                     if (!delete.contains(player))
@@ -86,13 +79,7 @@ public class BlackJackTable implements Table {
                 }
             }
             for (BlackJackPlayer player : playing) {
-                dealer.printHandCard(true);
-                for (BlackJackPlayer other : players) {
-                    if (player.equals(other))
-                        other.printHandCard(true);
-                    else
-                        other.printHandCard(false);
-                }
+                print(player);
                 while (true) {
                     int action = player.takeAction();
                     if (action == Config.HITACTION) {
@@ -212,7 +199,12 @@ public class BlackJackTable implements Table {
     private void print(BlackJackPlayer p) {
         //give one card to the player and then print the hand cards
         dealer.printHandCard(true);
-        p.printHandCard(true);
+        for (BlackJackPlayer other : players) {
+            if (p.equals(other))
+                other.printHandCard(true);
+            else
+                other.printHandCard(false);
+        }
     }
 
     private int standAction(BlackJackPlayer p) {
