@@ -158,5 +158,6 @@ public class BlackJackTable implements Table {
             return 0;
         shuffle.keepGive(dealer);
         computer = true;
+        return 1;
     }
 }
