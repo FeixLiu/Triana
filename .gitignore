@@ -1,0 +1,13 @@
+# IntelliJ IDEA Project files
+.idea
+*.iml
+*.ipr
+*.iws
+
+# Eclipse Project files
+.classpath
+.project
+.DS_Store
+/bin/
+
+*.class
