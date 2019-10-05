@@ -15,7 +15,7 @@ public class TriantaEnaTable implements Table {
     	System.out.println("The objective of the game is to accumulate a hand of cards that equals 31.");
     	System.out.println("Or a hand that has a card value greater than your opponents without exceeding 31.");
         int playerNum = 11;
-        while (playerNum > Config.MAXPLAYER || playerNum < Config.MINPLAYER) {
+        while ((playerNum > Config.MAXPLAYER || playerNum < Config.MINPLAYER) && playerNum != 0) {
             System.out.print("How many people in the game (include banker)? ");
             playerNum = Utils.getNumberFromPlayer();
             this.playerNum = playerNum;
@@ -33,13 +33,17 @@ public class TriantaEnaTable implements Table {
         }
         // random banker
         int random = (int)(Math.random() * all);
+        System.out.print("Please input the money for all player (default 200, please make sure you have more than 10): ");
+        int playerMoney = Utils.getMoney(-1);
+        System.out.print("Please input the money for all banker (default 200, please make sure you have more than 10): ");
+        int bankerMoney = Utils.getMoney(playerMoney);
         for (int i = 0; i < playerNum; i++) {
             if (i == random) {
-                dealer = new TriantaEnaPlayer(allName.get(i), Config.BANKER, Config.DEALERDEFAULTMONEY);
+                dealer = new TriantaEnaPlayer(allName.get(i), Config.BANKER, bankerMoney);
                 System.out.println(allName.get(i) + " you are the banker.");
             }
             else
-                players.add(new TriantaEnaPlayer(allName.get(i), Config.PLAYER, Config.DEFAULTMONEY));
+                players.add(new TriantaEnaPlayer(allName.get(i), Config.PLAYER, playerMoney));
         }
         if (this.playerNum <= 0)
             System.out.println("See you");
@@ -76,6 +80,10 @@ public class TriantaEnaTable implements Table {
                     playing.add(player);
                     shuffle.giveNewCard(player);
                 }
+            }
+            if (playing.size() == 0) {
+                System.out.println("See you");
+                break;
             }
             for (TriantaEnaPlayer player : playing) {
                 print(player);

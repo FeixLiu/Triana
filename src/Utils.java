@@ -21,8 +21,7 @@ public class Utils {
 		return (str.length() == 1 && (str.charAt(0) == 'y' || str.charAt(0) == 'Y'));
 	}
 
-	public static int getMoney() {
-		System.out.print("How many money do you have (default 200, please make sure you have more than 10): ");
+	public static int getMoney(int player_money) {
 		boolean flag = true;
 		int m = 0;
 		while (flag) {
@@ -40,7 +39,11 @@ public class Utils {
 			}
 			flag = temp;
 		}
-		return m == 0 ? 200 : m;
+		if (player_money == -1)
+			return m == 0 ? Config.DEFAULTMONEY : m;
+		else {
+			return Math.max(m, 3 * player_money);
+		}
 	}
 
 	public static char yesOrNo() {
