@@ -215,7 +215,7 @@ public class BlackJackPlayer extends CardPlayer{
 				else {
 					System.out.println(super.getNickName() + ": Lose!");
 				}
-				dealer.getWallet().winMoney(2*bet.get(which).getBet());;
+				dealer.getWallet().winMoney(bet.get(which).getBet());;
 				break;
 			}
 			case Config.BUST: {
