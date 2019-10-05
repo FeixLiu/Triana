@@ -21,7 +21,8 @@ public class HandCard {
                 ace += 1;
         }
         List<Integer> rst = new ArrayList<>();
-        rst.add(total);
+        if (ace == 0)
+            rst.add(total);
         if (ace == 1) {
             rst.add(total + 1);
             rst.add(total + 11);
