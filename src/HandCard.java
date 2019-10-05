@@ -84,7 +84,7 @@ public class HandCard {
             	return false;
             }
         }
-    	if (total==14) {
+    	if (total==14 && !temp.equals(empty)) {
     		return true;
     	}
     	return false;
