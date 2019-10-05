@@ -13,19 +13,21 @@ public class BlackJackTable implements Table {
     	System.out.println("Welcome to the BlackJack game.");
     	System.out.println("The objective of the game is to accumulate a hand of cards that equals 21.");
     	System.out.println("Or a hand that has a card value greater than your opponents without exceeding 21.");
-        System.out.print("How many players in the game? ");
-        int playerNum = Utils.getNumberFromPlayer();
-        this.playerNum = playerNum;
+        int playerNum = 11;
+        while (playerNum > Config.MAXPLAYER) {
+            System.out.print("How many players in the game? ");
+            playerNum = Utils.getNumberFromPlayer();
+            this.playerNum = playerNum;
+        }
         int all = playerNum;
     	players = new ArrayList<>();
-        shuffle = new Shuffle((int)Math.ceil(playerNum / 2.0));
+        shuffle = new Shuffle(Config.CARDSET);
         check = new BlackJackRules();
         String str;
         while (playerNum > 0) {
             System.out.print("The information of player " + (all - playerNum + 1) + ". ");
             str = Utils.getName("player");
-            int money = Utils.getMoney();
-            players.add(new BlackJackPlayer(str, money));
+            players.add(new BlackJackPlayer(str, Config.DEFAULTMONEY));
             playerNum--;
         }
         boolean isMan = Utils.realMan(); //ask whether the dealer is a real man or not

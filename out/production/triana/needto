@@ -1,0 +1,13 @@
+1 不用input money
+2 dealer 有钱
+3 人数不超过9
+4 没有split double
+5 发牌顺序
+6 all bust dealer也发牌
+7 2 复牌
+8 只有一个ace当1
+9 平局dealer赢
+10 排用完再shuffle
+11 同花色14 起手31 31
+12 dealer的轮转
+13 name是个类

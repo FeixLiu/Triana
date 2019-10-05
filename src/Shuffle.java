@@ -1,3 +1,6 @@
+import java.util.Collections;
+import java.util.stream.IntStream;
+
 public class Shuffle {
     private Card[] cards;
     private int[] mask; //mask for the cards have already been given to the dealer or player
@@ -12,8 +15,8 @@ public class Shuffle {
                 }
             }
         }
-        mask = new int[Config.CARDNUM];
-        for (int i = 0; i < Config.CARDNUM; i++)
+        mask = new int[n * Config.CARDNUM];
+        for (int i = 0; i < n * Config.CARDNUM; i++)
             mask[i] = 0;
     }
 
@@ -22,9 +25,11 @@ public class Shuffle {
     }
 
     public void newShuffle() {
-        for (int i = 0; i < mask.length; i++) {
-            mask[i] = 0;
-        }
+        int sum = 0;
+        for (int value : mask)
+            sum += value;
+        if (sum >= Config.CARDNUM)
+            IntStream.range(0, mask.length).forEach(i -> mask[i] = 0);
     }
 
     public void giveNewCard(CardPlayer p) {

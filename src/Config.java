@@ -14,6 +14,9 @@ public class Config {
 	public static final int DEALERWIN = -1;
 	public static final int BUST = 2;
 
+	public static final int MAXPLAYER = 10;
+
+	public static final int CARDSET = 2;
 	public static final int CARDNUM = 52;
 	public static final int CARDRANGE = 13;
 	public static final String[] SUITS = {"Diamond", "Plum", "Heart", "Spade"};
