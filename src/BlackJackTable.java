@@ -195,7 +195,7 @@ public class BlackJackTable implements Table {
         print(player);
         if (check.checkBust(player, player.getWhich())) {
             player.endGame(Config.BUST, dealer);
-            return !player.isOver();
+            return false;
         }
         return true;
     }

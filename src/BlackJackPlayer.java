@@ -192,6 +192,8 @@ public class BlackJackPlayer extends CardPlayer{
 				else {
 					System.out.println(super.getNickName() + ": Win!");
 				}
+//				System.out.println("which: " + which);
+//				System.out.println("bet: " + bet.get(which).getBet());
 				wallet.winMoney(2*bet.get(which).getBet());
 				dealer.getWallet().winMoney(-1*bet.get(which).getBet());
 				break;
