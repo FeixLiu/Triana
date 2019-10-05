@@ -34,7 +34,7 @@ public class BlackJackTable implements Table {
             allName.add(str);
         }
         // random banker
-        int random = (int)(Math.random() * all) - 1;
+        int random = (int)(Math.random() * all);
         for (int i = 0; i < playerNum; i++) {
             if (i == random) {
                 dealer = new BlackJackPlayer(allName.get(i), Config.BANKER, Config.DEFAULTMONEY);
@@ -118,8 +118,7 @@ public class BlackJackTable implements Table {
                         player.endGame(check.checkWin(player, dealer, i), dealer);
                 List<BlackJackPlayer> temp = new ArrayList<>();
                 for (BlackJackPlayer player : playing) {
-                    System.out.print(player.getNickName());
-                    System.out.print("Do you want to play another game? ");
+                    System.out.print(player.getNickName() + ", do you want to play another game? ");
                     char c = Utils.yesOrNo();
                     if (c != 'y' && c != 'Y') {
                         temp.add(player);

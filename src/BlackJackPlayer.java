@@ -90,7 +90,7 @@ public class BlackJackPlayer extends CardPlayer{
 				case Config.HITACTION:
 					return Config.HITACTION;
 				case Config.STANDACTION: {
-					which++;
+//					which++;
 					return Config.STANDACTION;
 				}
 				case Config.SPLITACTION:{
@@ -151,7 +151,7 @@ public class BlackJackPlayer extends CardPlayer{
 			return Config.NOENOUGHMONEY;
 		}
 		
-		System.out.print("Do you want to make bet?");
+		System.out.print(super.getNickName() + ", do you want to make bet?");
 		char res = Utils.yesOrNo();
 		if(res != 'y' && res != 'Y') {
 			return Config.NOTMAKEBET;
@@ -182,7 +182,7 @@ public class BlackJackPlayer extends CardPlayer{
 		
 	}
 	
-	public void endGame(int result) {
+	public void endGame(int result, BlackJackPlayer dealer) {
 		//get the result of the index hand of card
 		switch(result) {
 			case Config.PLAYERWIN: {
@@ -193,6 +193,7 @@ public class BlackJackPlayer extends CardPlayer{
 					System.out.println(super.getNickName() + ": Win!");
 				}
 				wallet.winMoney(2*bet.get(which).getBet());
+				dealer.getWallet().winMoney(-1*bet.get(which).getBet());
 				break;
 			}
 			case Config.DEAL: {
@@ -212,6 +213,7 @@ public class BlackJackPlayer extends CardPlayer{
 				else {
 					System.out.println(super.getNickName() + ": Lose!");
 				}
+				dealer.getWallet().winMoney(2*bet.get(which).getBet());;
 				break;
 			}
 			case Config.BUST: {
