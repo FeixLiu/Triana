@@ -5,7 +5,7 @@ public class BlackJackTable implements Table {
     private Shuffle shuffle;
     private BlackJackRules check;
     private List<BlackJackPlayer> players;
-    private BlackJackDealer dealer;
+    private BlackJackPlayer dealer;
     private int playerNum;
     private boolean computer;
 
@@ -27,16 +27,12 @@ public class BlackJackTable implements Table {
         while (playerNum > 0) {
             System.out.print("The information of player " + (all - playerNum + 1) + ". ");
             str = Utils.getName("player");
-            players.add(new BlackJackPlayer(str, Config.DEFAULTMONEY));
+            players.add(new BlackJackPlayer(str, Config.PLAYER, Config.DEFAULTMONEY));
             playerNum--;
         }
-        boolean isMan = Utils.realMan(); //ask whether the dealer is a real man or not
-        if (isMan) {
-            str = Utils.getName("dealer");
-            dealer = new BlackJackDealer(str);
-        }
-        else
-            dealer = new BlackJackDealer();
+        System.out.print("The information of dealer " + (all - playerNum + 1) + ". ");
+        str = Utils.getName("dealer");
+        dealer = new BlackJackPlayer(str, Config.BANKER, Config.DEFAULTMONEY);
         if (this.playerNum <= 0) {
             System.out.println("See you");
         }
@@ -55,7 +51,7 @@ public class BlackJackTable implements Table {
             shuffle.newShuffle();
             List<BlackJackPlayer> delete = new ArrayList<>();
             for (BlackJackPlayer player : players) {
-                if(!player.makeBet()) {
+                if (!player.makeBet()) {
                     if (!delete.contains(player))
                         delete.add(player);
                     if (delete.size() == players.size())
@@ -63,7 +59,7 @@ public class BlackJackTable implements Table {
                     continue;
                 }
                 shuffle.giveNewCard(player);
-                dealer.printDealerHandCard();
+                dealer.printHandCard();
                 player.printHandCard();
                 while (true) {
                     int action = player.takeAction();

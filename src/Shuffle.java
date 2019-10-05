@@ -49,29 +49,24 @@ public class Shuffle {
         p.giveCard(cards[a], which);
     }
 
-    public void keepGive(BlackJackDealer dealer) {
+    public void keepGive(BlackJackPlayer dealer) {
         // keep give dealer cards if dealer's hand cards' value is less than 17
-        while (max(dealer.getHandCard().get(0)) < 17)
+        while (max(dealer.getHandCard().get(0)) < 27)
             giveOneCard(dealer, 0);
     }
 
     private int max(HandCard a) {
         // get the max value of the possible value of the hand cards
-        int ace = 0;
-        int sub_total = 0;
-        for (Card c : a.getCards()) {
-            if (c.getValue() == 1)
-                ace += 1;
+        int[] value = a.getValue();
+        if (value.length == 1)
+            return value[0];
+        else {
+            int b = value[0];
+            int c = value[1];
+            if (c <= 31)
+                return c;
             else
-                sub_total += Math.min(c.getValue(), 10);
+                return b;
         }
-        while (ace > 0) {
-            if (sub_total + 11 > 21)
-                sub_total ++;
-            else
-                sub_total += 11;
-            ace--;
-        }
-        return sub_total;
     }
 }
