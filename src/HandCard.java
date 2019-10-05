@@ -41,6 +41,29 @@ public class HandCard {
             return true;
         return a.getValue() > 10 && b.getValue() == 1;
     }
+    
+    public boolean isTriantaEna() {
+        //test whether the hand cards is black jack or not
+        if (cards.size() != 3)
+            return false;
+        Card a = cards.get(0);
+        Card b = cards.get(1);
+        Card c = cards.get(2);
+        if (a.getValue() > 1 && a.getValue() <= 10)
+            return false;
+        if (a.getValue() == 1 && b.getValue() > 10 && c.getValue() > 10)
+            return true;
+        if (a.getValue() > 10 && b.getValue() == 1 && c.getValue() > 10)
+            return true;
+        if (a.getValue() > 10 && b.getValue() > 10 && c.getValue() == 1)
+            return true;
+        return false;
+    }
+    
+    public boolean isTianHu() {
+
+    	return false;
+    }
 
     public List<Card> getCards() {
         return cards;
