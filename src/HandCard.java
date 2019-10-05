@@ -82,7 +82,6 @@ public class HandCard {
             }
             else {
             	return false;
-            	break;
             }
         }
     	if (total==14) {
