@@ -27,15 +27,17 @@ public class BlackJackTable implements Table {
         String str;
         List<String> allName = new ArrayList<>();
         for (int i = 0; i < playerNum; i++) {
-            System.out.print("Please input the name of person " + (all - playerNum + 1) + ".");
+            System.out.print("Please input the name of person " + (i + 1) + ".");
             str = Utils.getName();
             allName.add(str);
         }
         // random banker
-        int random = (int)(Math.random() * all);
+        int random = (int)(Math.random() * all) - 1;
         for (int i = 0; i < playerNum; i++) {
-            if (i == random)
+            if (i == random) {
                 dealer = new BlackJackPlayer(allName.get(i), Config.BANKER, Config.DEFAULTMONEY);
+                System.out.println(allName.get(i) + " you are the banker.");
+            }
             else
                 players.add(new BlackJackPlayer(allName.get(i), Config.PLAYER, Config.DEFAULTMONEY));
         }
@@ -85,8 +87,8 @@ public class BlackJackTable implements Table {
                         print(player);
                     }
                     else if (action == Config.STANDACTION) {
-                        if (standAction(player) == 1)
-                            break;
+                        // standAction(player);
+                        break;
                     }
                     else if (action == Config.DOUBLEACTION) {
                         if (!hitAction(player))
@@ -99,7 +101,7 @@ public class BlackJackTable implements Table {
             }
             players.removeAll(delete);
             delete.clear();
-            if (players.size() != 0) {
+            if (playing.size() != 0) {
                 shuffle.keepGive(dealer);
                 dealer.printHandCard(true);
                 for (BlackJackPlayer player : playing)
@@ -156,6 +158,5 @@ public class BlackJackTable implements Table {
             return 0;
         shuffle.keepGive(dealer);
         computer = true;
-        return 1;
     }
 }
