@@ -43,10 +43,10 @@ public class Utils {
 		return m == 0 ? 200 : m;
 	}
 
-	public static char nextGame() {
+	public static char yesOrNo() {
 		String str;
 		do {
-			System.out.print(", do you want a new game? Y/y for yes, other for no: ");
+			System.out.print("Y/y for yes, other for no: ");
 			str = scanner.nextLine();
 		} while (str.length() == 0);
 		return str.length() == 1 ? str.charAt(0) : 'n';

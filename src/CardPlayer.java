@@ -45,10 +45,10 @@ public class CardPlayer extends Person{
 		for(int i = 0; i < handCard.size(); i++) {
 			List<Card> cards = handCard.get(i).getCards();
 			if(handCard.size() == 1) {
-				System.out.print(super.getName() + "'s handcards: ");
+				System.out.print(super.getNickName() + "'s handcards: ");
 			}
 			else {
-				System.out.print(super.getName() + "'s handcards " + (i+1) + ": ");
+				System.out.print(super.getNickName() + "'s handcards " + (i+1) + ": ");
 			}
 			
 			for(int j = 0; j < cards.size(); j++) {

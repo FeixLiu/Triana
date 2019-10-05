@@ -68,10 +68,10 @@ public class BlackJackPlayer extends CardPlayer{
 		//for the index hand of card, take the action(hit, stand, split, double up)
 		System.out.println("========================================");
 		if(handCard.size() > 1) {
-			System.out.println(super.getName() + ", please select action for your " + (which+1) + " hand cards: ");
+			System.out.println(super.getNickName() + ", please select action for your " + (which+1) + " hand cards: ");
 		}
 		else {
-			System.out.println(super.getName() + ", please select action for your hand cards: ");
+			System.out.println(super.getNickName() + ", please select action for your hand cards: ");
 		}
 
 		System.out.println(Config.HITACTION + " Hit.");
@@ -98,7 +98,7 @@ public class BlackJackPlayer extends CardPlayer{
 							|| handCard.size() != 1
 							|| handCard.get(0).getCards().size() != 2
 							|| !(handCard.get(0).getCards().get(0).getValue() == handCard.get(0).getCards().get(1).getValue())){
-						System.out.print(super.getName() + " cannot take this action, please choose again:");
+						System.out.print(super.getNickName() + " cannot take this action, please choose again:");
 						break;
 					}
 					else {
@@ -125,7 +125,7 @@ public class BlackJackPlayer extends CardPlayer{
 					}
 					
 					if(currentMoney < bet.get(which).getBet()) {
-						System.out.print(super.getName() + " cannot take this action, please choose again:");
+						System.out.print(super.getNickName() + " cannot take this action, please choose again:");
 						break;
 					}
 					else {
@@ -142,15 +142,21 @@ public class BlackJackPlayer extends CardPlayer{
 		}
 	}
 	
-	public boolean makeBet(){
+	public int makeBet(){
 		//make bet at the beginning of the game
 		bet.clear();
 		int currentMoney = wallet.getMoney();
 		if(currentMoney < Config.MINBET) {
-			System.out.println(super.getName() + " don't have enough money!!");
-			return false;
+			System.out.println(super.getNickName() + " don't have enough money!!");
+			return Config.NOENOUGHMONEY;
 		}
-		System.out.print(super.getName() + ", please input the money you want to bet: ");
+		
+		System.out.print("Do you want to make bet?");
+		char res = Utils.yesOrNo();
+		if(res != 'y' && res != 'Y') {
+			return Config.NOTMAKEBET;
+		}
+		System.out.print(super.getNickName() + ", please input the money you want to bet: ");
 		
 		int money = Utils.getNumberFromPlayer();
 		while(money > currentMoney || money > Config.MAXBET || money < Config.MINBET) {
@@ -168,11 +174,11 @@ public class BlackJackPlayer extends CardPlayer{
 		bet.add(new Bet(money));
 		wallet.setWallet(currentMoney - money);
 
-		System.out.print(super.getName() + "'s bet:\t");
+		System.out.print(super.getNickName() + "'s bet:\t");
 		printBet();
-		System.out.print(super.getName() + "'s wallet:\t");
+		System.out.print(super.getNickName() + "'s wallet:\t");
 		System.out.println(wallet.getMoney());
-		return true;
+		return Config.MAKEBET;
 		
 	}
 	
@@ -181,30 +187,30 @@ public class BlackJackPlayer extends CardPlayer{
 		switch(result) {
 			case Config.PLAYERWIN: {
 				if(handCard.size() > 1) {
-					System.out.println(super.getName() + "'s handcards " + (which+1) + ": Win!");
+					System.out.println(super.getNickName() + "'s handcards " + (which+1) + ": Win!");
 				}
 				else {
-					System.out.println(super.getName() + ": Win!");
+					System.out.println(super.getNickName() + ": Win!");
 				}
 				wallet.winMoney(2*bet.get(which).getBet());
 				break;
 			}
 			case Config.DEAL: {
 				if(handCard.size() > 1) {
-					System.out.println(super.getName() + "'s handcards " + (which+1) + ": End in a tie!");
+					System.out.println(super.getNickName() + "'s handcards " + (which+1) + ": End in a tie!");
 				}
 				else {
-					System.out.println(super.getName() + ": End in a tie!");
+					System.out.println(super.getNickName() + ": End in a tie!");
 				}
 				wallet.winMoney(bet.get(which).getBet());
 				break;
 			}
 			case Config.DEALERWIN: {
 				if(handCard.size() > 1) {
-					System.out.println(super.getName() + "'s handcards " + (which+1) + ": Lose!");
+					System.out.println(super.getNickName() + "'s handcards " + (which+1) + ": Lose!");
 				}
 				else {
-					System.out.println(super.getName() + ": Lose!");
+					System.out.println(super.getNickName() + ": Lose!");
 				}
 				break;
 			}
