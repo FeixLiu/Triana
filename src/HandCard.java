@@ -21,8 +21,16 @@ public class HandCard {
                 ace += 1;
         }
         List<Integer> rst = new ArrayList<>();
-        for (int i = 0; i <= ace; i++)
-            rst.add(total + i * 11 + ace - i);
+        rst.add(total);
+        if (ace == 1) {
+            rst.add(total + 1);
+            rst.add(total + 11);
+        }
+        if (ace > 1) {
+            int left = ace - 1;
+            rst.add(total + 1 + 11 * left);
+            rst.add(total + 11 + 11 * left);
+        }
         int[] temp = new int[rst.size()];
         for (int i = 0; i < rst.size(); i++)
             temp[i] = rst.get(i);

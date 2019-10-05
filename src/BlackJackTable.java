@@ -5,7 +5,7 @@ public class BlackJackTable implements Table {
     private Shuffle shuffle;
     private BlackJackRules check;
     private List<BlackJackPlayer> players;
-    private BlackJackDealer dealer;
+    private BlackJackPlayer dealer;
     private int playerNum;
     private boolean computer;
 
@@ -13,28 +13,26 @@ public class BlackJackTable implements Table {
     	System.out.println("Welcome to the BlackJack game.");
     	System.out.println("The objective of the game is to accumulate a hand of cards that equals 21.");
     	System.out.println("Or a hand that has a card value greater than your opponents without exceeding 21.");
-        System.out.print("How many players in the game? ");
-        int playerNum = Utils.getNumberFromPlayer();
-        this.playerNum = playerNum;
+        int playerNum = 11;
+        while (playerNum > Config.MAXPLAYER) {
+            System.out.print("How many players in the game? ");
+            playerNum = Utils.getNumberFromPlayer();
+            this.playerNum = playerNum;
+        }
         int all = playerNum;
     	players = new ArrayList<>();
-        shuffle = new Shuffle((int)Math.ceil(playerNum / 2.0));
+        shuffle = new Shuffle(Config.CARDSET);
         check = new BlackJackRules();
         String str;
         while (playerNum > 0) {
             System.out.print("The information of player " + (all - playerNum + 1) + ". ");
             str = Utils.getName("player");
-            int money = Utils.getMoney();
-            players.add(new BlackJackPlayer(str, money));
+            players.add(new BlackJackPlayer(str, Config.PLAYER, Config.DEFAULTMONEY));
             playerNum--;
         }
-        boolean isMan = Utils.realMan(); //ask whether the dealer is a real man or not
-        if (isMan) {
-            str = Utils.getName("dealer");
-            dealer = new BlackJackDealer(str);
-        }
-        else
-            dealer = new BlackJackDealer();
+        System.out.print("The information of dealer " + (all - playerNum + 1) + ". ");
+        str = Utils.getName("dealer");
+        dealer = new BlackJackPlayer(str, Config.BANKER, Config.DEFAULTMONEY);
         if (this.playerNum <= 0) {
             System.out.println("See you");
         }
@@ -53,7 +51,7 @@ public class BlackJackTable implements Table {
             shuffle.newShuffle();
             List<BlackJackPlayer> delete = new ArrayList<>();
             for (BlackJackPlayer player : players) {
-                if(!player.makeBet()) {
+                if (!player.makeBet()) {
                     if (!delete.contains(player))
                         delete.add(player);
                     if (delete.size() == players.size())
@@ -61,7 +59,7 @@ public class BlackJackTable implements Table {
                     continue;
                 }
                 shuffle.giveNewCard(player);
-                dealer.printDealerHandCard();
+                dealer.printHandCard();
                 player.printHandCard();
                 while (true) {
                     int action = player.takeAction();

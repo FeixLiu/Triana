@@ -2,7 +2,7 @@
 2 dealer 有钱
 //3 人数不超过9
 4 没有split double
-// 5 发牌顺序
+5 发牌顺序
 6 all bust dealer也发牌
 //7 2 复牌
 //8 只有一个ace当1
@@ -11,4 +11,4 @@
 11 同花色14 起手31 31
 12 dealer的轮转
 13 name是个类
-// 14 player dealer 合并
+14 player dealer 合并
