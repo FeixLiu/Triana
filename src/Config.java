@@ -15,6 +15,7 @@ public class Config {
 	public static final int BUST = 2;
 
 	public static final int MAXPLAYER = 10;
+	public static final int MINPLAYER = 2;
 
 	public static final int CARDSET = 2;
 	public static final int CARDNUM = 52;
