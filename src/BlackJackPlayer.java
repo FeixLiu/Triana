@@ -182,7 +182,7 @@ public class BlackJackPlayer extends CardPlayer{
 		
 	}
 	
-	public void endGame(int result) {
+	public void endGame(int result, BlackJackPlayer dealer) {
 		//get the result of the index hand of card
 		switch(result) {
 			case Config.PLAYERWIN: {
@@ -193,6 +193,7 @@ public class BlackJackPlayer extends CardPlayer{
 					System.out.println(super.getNickName() + ": Win!");
 				}
 				wallet.winMoney(2*bet.get(which).getBet());
+				dealer.getWallet().winMoney(-1*bet.get(which).getBet());
 				break;
 			}
 			case Config.DEAL: {
@@ -212,6 +213,7 @@ public class BlackJackPlayer extends CardPlayer{
 				else {
 					System.out.println(super.getNickName() + ": Lose!");
 				}
+				dealer.getWallet().winMoney(2*bet.get(which).getBet());;
 				break;
 			}
 			case Config.BUST: {
