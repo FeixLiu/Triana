@@ -226,7 +226,7 @@ public class BlackJackPlayer extends CardPlayer{
 				break;
 			}
 		}
-		which++;
+//		which++;
 	}
 }
 
