@@ -69,7 +69,25 @@ public class HandCard {
     }
     
     public boolean isTianHu() {
-
+    	int total = 0;
+    	String temp = new String("");
+    	String empty = new String("");
+    	for (Card card : cards) {
+            total = total + card.getValue();
+            if (temp.equals(empty)) {
+            	temp = card.getSuit();
+            }
+            else if(card.getSuit().equals(temp)){
+            	temp = card.getSuit();
+            }
+            else {
+            	return false;
+            	break;
+            }
+        }
+    	if (total==14) {
+    		return true;
+    	}
     	return false;
     }
 
