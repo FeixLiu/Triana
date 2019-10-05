@@ -11,12 +11,12 @@ public class BlackJackTable implements Table {
     private boolean flag;
 
     public BlackJackTable() {
-    	System.out.println("Welcome to the BlackJack game.");
-    	System.out.println("The objective of the game is to accumulate a hand of cards that equals 21.");
-    	System.out.println("Or a hand that has a card value greater than your opponents without exceeding 21.");
+    	System.out.println("Welcome to the Trianta Ena game.");
+    	System.out.println("The objective of the game is to accumulate a hand of cards that equals 31.");
+    	System.out.println("Or a hand that has a card value greater than your opponents without exceeding 31.");
         int playerNum = 11;
         while (playerNum > Config.MAXPLAYER) {
-            System.out.print("How many players in the game? ");
+            System.out.print("How many people in the game? ");
             playerNum = Utils.getNumberFromPlayer();
             this.playerNum = playerNum;
         }
