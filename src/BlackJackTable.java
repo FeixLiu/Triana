@@ -106,12 +106,12 @@ public class BlackJackTable implements Table {
                         player.endGame(check.checkWin(player, dealer, i));
                 List<BlackJackPlayer> temp = new ArrayList<>();
                 for (BlackJackPlayer player : playing) {
-                    System.out.print(player.getName());
+                    System.out.print(player.getNickName());
                     System.out.print("Do you want to play another game? ");
                     char c = Utils.yesOrNo();
                     if (c != 'y' && c != 'Y') {
                         temp.add(player);
-                        System.out.print(player.getName() + "'s balance in wallet is: ");
+                        System.out.print(player.getNickName() + "'s balance in wallet is: ");
                         System.out.println(player.getWallet().getMoney());
                     }
                 }
@@ -136,7 +136,7 @@ public class BlackJackTable implements Table {
 
     public void printResult() {
         for (BlackJackPlayer player : players) {
-            System.out.print(player.getName() + "'s balance in wallet is: ");
+            System.out.print(player.getNickName() + "'s balance in wallet is: ");
             System.out.println(player.getWallet().getMoney());
         }
     }

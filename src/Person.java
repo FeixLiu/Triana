@@ -8,7 +8,7 @@ public class Person {
 	}
 	
 	public Person(String firstName, String middleName, String lastName, String nickName) {
-		this.name = new Name(firstName, middleName, lastName, nickName);
+		this.name.setName(firstName, middleName, lastName, nickName);
 	}
 	
 	public String getNickName() {
