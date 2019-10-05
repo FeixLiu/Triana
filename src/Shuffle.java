@@ -34,7 +34,6 @@ public class Shuffle {
 
     public void giveNewCard(CardPlayer p) {
         // at the start of the game, give the dealer and player two cards
-        p.deleteHandCard();
         giveOneCard(p, 0);
         giveOneCard(p, 0);
     }
