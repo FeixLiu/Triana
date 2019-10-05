@@ -73,13 +73,14 @@ public class BlackJackTable implements Table {
                     else
                         other.printHandCard(false);
                 }
-                if (player.makeBet() == Config.NOENOUGHMONEY) {
+                int a = player.makeBet();
+                if (a == Config.NOENOUGHMONEY) {
                     if (!delete.contains(player))
                         delete.add(player);
                     if (delete.size() == players.size())
                         break;
                 }
-                else {
+                else if (a == Config.MAKEBET){
                     playing.add(player);
                     shuffle.giveNewCard(player);
                 }
@@ -124,6 +125,7 @@ public class BlackJackTable implements Table {
                 for (BlackJackPlayer player : playing)
                     for (int i = 0; i < player.getHandCard().size(); i++)
                         player.endGame(check.checkWin(player, dealer, i), dealer);
+                printMoney();
                 List<BlackJackPlayer> temp = new ArrayList<>();
                 for (BlackJackPlayer player : playing) {
                     System.out.print(player.getNickName() + ", do you want to play another game? ");
@@ -138,7 +140,6 @@ public class BlackJackTable implements Table {
                     players.remove(out);
             }
             playing.clear();
-            printMoney();
             changeRole();
         }
         if (playerNum > 0)
