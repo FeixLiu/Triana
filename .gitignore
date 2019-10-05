@@ -8,6 +8,7 @@
 .classpath
 .project
 .DS_Store
+.settings
 /bin/
 
 *.class
