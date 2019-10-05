@@ -52,6 +52,10 @@ public class BlackJackTable implements Table {
         List<BlackJackPlayer> playing = new ArrayList<>();
         List<BlackJackPlayer> delete = new ArrayList<>();
         while (flag && players.size() != 0) {
+            dealer.deleteHandCard();
+            for (BlackJackPlayer player : players) {
+                player.deleteHandCard();
+            }
             playerNum = players.size();
             shuffle.newShuffle();
             shuffle.giveOneCard(dealer,0);
