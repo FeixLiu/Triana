@@ -1,4 +1,4 @@
-BlackJack
+TriantaEna
 ==========
 ### Group Members:
 	Name: Yuang Liu     BUID:U99473611
@@ -6,13 +6,13 @@ BlackJack
 	Name: Jun Xiao      BUID:U85900288
 	
 ### How to run:
-The entrance of the program is BlackJack.java. You can run this program by
+The entrance of the program is TriantaEna.java. You can run this program by
 
-	javac BlackJack.java
-	java BlackJack
+	javac TriantaEna.java
+	java TriantaEna
 
 ### Run Example:
-Welcome to the BlackJack game.<br>
+Welcome to the TriantaEna game.<br>
 The objective of the game is to accumulate a hand of cards that equals 21.<br>
 Or a hand that has a card value greater than your opponents without exceeding 21.<br>
 How many players in the game? **`1`** <br>

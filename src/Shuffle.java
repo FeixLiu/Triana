@@ -1,4 +1,3 @@
-import java.util.Collections;
 import java.util.stream.IntStream;
 
 public class Shuffle {
@@ -48,7 +47,7 @@ public class Shuffle {
         p.giveCard(cards[a], which);
     }
 
-    public void keepGive(BlackJackPlayer dealer) {
+    public void keepGive(TriantaEnaPlayer dealer) {
         // keep give dealer cards if dealer's hand cards' value is less than 17
         while (max(dealer.getHandCard().get(0)) < 27)
             giveOneCard(dealer, 0);

@@ -1,18 +1,16 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-public class BlackJackTable implements Table {
+public class TriantaEnaTable implements Table {
     private Shuffle shuffle;
-    private BlackJackRules check;
-    private List<BlackJackPlayer> players;
-    private BlackJackPlayer dealer;
+    private TriantaEnaRules check;
+    private List<TriantaEnaPlayer> players;
+    private TriantaEnaPlayer dealer;
     private int playerNum;
     private boolean computer;
     private boolean flag;
 
-    public BlackJackTable() {
+    public TriantaEnaTable() {
     	System.out.println("Welcome to the Trianta Ena game.");
     	System.out.println("The objective of the game is to accumulate a hand of cards that equals 31.");
     	System.out.println("Or a hand that has a card value greater than your opponents without exceeding 31.");
@@ -25,7 +23,7 @@ public class BlackJackTable implements Table {
         int all = playerNum;
     	players = new ArrayList<>();
         shuffle = new Shuffle(Config.CARDSET);
-        check = new BlackJackRules();
+        check = new TriantaEnaRules();
         String str;
         List<String> allName = new ArrayList<>();
         for (int i = 0; i < playerNum; i++) {
@@ -37,11 +35,11 @@ public class BlackJackTable implements Table {
         int random = (int)(Math.random() * all);
         for (int i = 0; i < playerNum; i++) {
             if (i == random) {
-                dealer = new BlackJackPlayer(allName.get(i), Config.BANKER, Config.DEALERDEFAULTMONEY);
+                dealer = new TriantaEnaPlayer(allName.get(i), Config.BANKER, Config.DEALERDEFAULTMONEY);
                 System.out.println(allName.get(i) + " you are the banker.");
             }
             else
-                players.add(new BlackJackPlayer(allName.get(i), Config.PLAYER, Config.DEFAULTMONEY));
+                players.add(new TriantaEnaPlayer(allName.get(i), Config.PLAYER, Config.DEFAULTMONEY));
         }
         if (this.playerNum <= 0)
             System.out.println("See you");
@@ -51,21 +49,21 @@ public class BlackJackTable implements Table {
 
     public void playGame() {
         // the body of the game, ask the player for its choice and ask the checker check whether the player bust or not for each round
-        List<BlackJackPlayer> playing = new ArrayList<>();
-        List<BlackJackPlayer> delete = new ArrayList<>();
+        List<TriantaEnaPlayer> playing = new ArrayList<>();
+        List<TriantaEnaPlayer> delete = new ArrayList<>();
         while (flag && players.size() != 0) {
             printMoney();
             dealer.deleteHandCard();
-            for (BlackJackPlayer player : players) {
+            for (TriantaEnaPlayer player : players) {
                 player.deleteHandCard();
             }
             playerNum = players.size();
             shuffle.newShuffle();
             shuffle.giveOneCard(dealer,0);
-            for (BlackJackPlayer player : players) {
+            for (TriantaEnaPlayer player : players) {
                 shuffle.giveOneCard(player, 0);
             }
-            for (BlackJackPlayer player : players) {
+            for (TriantaEnaPlayer player : players) {
             	print(player);
                 int a = player.makeBet();
                 if (a == Config.NOENOUGHMONEY) {
@@ -79,7 +77,7 @@ public class BlackJackTable implements Table {
                     shuffle.giveNewCard(player);
                 }
             }
-            for (BlackJackPlayer player : playing) {
+            for (TriantaEnaPlayer player : playing) {
                 print(player);
                 while (true) {
                     int action = player.takeAction();
@@ -108,14 +106,14 @@ public class BlackJackTable implements Table {
             if (playing.size() != 0) {
                 shuffle.keepGive(dealer);
                 dealer.printHandCard(true);
-                for (BlackJackPlayer player : playing)
+                for (TriantaEnaPlayer player : playing)
                     player.printHandCard(true);
-                for (BlackJackPlayer player : playing)
+                for (TriantaEnaPlayer player : playing)
                     for (int i = 0; i < player.getHandCard().size(); i++)
                         player.endGame(check.checkWin(player, dealer, i), dealer);
                 printMoney();
-                List<BlackJackPlayer> temp = new ArrayList<>();
-                for (BlackJackPlayer player : players) {
+                List<TriantaEnaPlayer> temp = new ArrayList<>();
+                for (TriantaEnaPlayer player : players) {
                     System.out.print(player.getNickName() + ", do you want to play another game? ");
                     char c = Utils.yesOrNo();
                     if (c != 'y' && c != 'Y') {
@@ -124,7 +122,7 @@ public class BlackJackTable implements Table {
                         System.out.println(player.getWallet().getMoney());
                     }
                 }
-                for (BlackJackPlayer out : temp)
+                for (TriantaEnaPlayer out : temp)
                     players.remove(out);
             }
             playing.clear();
@@ -136,14 +134,14 @@ public class BlackJackTable implements Table {
 
     private void printMoney() {
         System.out.println("Dealer's money: " + dealer.getWallet().getMoney());
-        for (BlackJackPlayer p : players)
+        for (TriantaEnaPlayer p : players)
             System.out.println(p.getNickName() + "'s money: " + p.getWallet().getMoney());
     }
 
     private void changeRole() {
-        List<BlackJackPlayer> more = new ArrayList<>();
+        List<TriantaEnaPlayer> more = new ArrayList<>();
         int banker = dealer.getWallet().getMoney();
-        for (BlackJackPlayer player : players) {
+        for (TriantaEnaPlayer player : players) {
             if (player.getWallet().getMoney() > banker)
                 more.add(player);
         }
@@ -158,7 +156,7 @@ public class BlackJackTable implements Table {
                 return -1;
             });
         }
-        for (BlackJackPlayer p : more) {
+        for (TriantaEnaPlayer p : more) {
             System.out.println(p.getNickName() + " do you want to be a banker? ");
             char c = Utils.yesOrNo();
             if (c == 'y' || c == 'Y') {
@@ -171,7 +169,7 @@ public class BlackJackTable implements Table {
             }
         }
         int a = (int)(Math.random() * more.size());
-        BlackJackPlayer p = more.get(a);
+        TriantaEnaPlayer p = more.get(a);
         System.out.println(p.getNickName() + " you are chosen to be a banker ramdonly.");
         p.switchRole();
         dealer.switchRole();
@@ -180,7 +178,7 @@ public class BlackJackTable implements Table {
         players.remove(p);
     }
 
-    private boolean hitAction(BlackJackPlayer player) {
+    private boolean hitAction(TriantaEnaPlayer player) {
         shuffle.giveOneCard(player, player.getWhich());
         print(player);
         if (check.checkBust(player, player.getWhich())) {
@@ -191,17 +189,17 @@ public class BlackJackTable implements Table {
     }
 
     public void printResult() {
-        for (BlackJackPlayer player : players) {
+        for (TriantaEnaPlayer player : players) {
             System.out.print(player.getNickName() + "'s balance in wallet is: ");
             System.out.println(player.getWallet().getMoney());
         }
     }
 
-    private void print(BlackJackPlayer p) {
+    private void print(TriantaEnaPlayer p) {
         //give one card to the player and then print the hand cards
     	System.out.println("========================================");
         dealer.printHandCard(true);
-        for (BlackJackPlayer other : players) {
+        for (TriantaEnaPlayer other : players) {
             if (p.equals(other))
                 other.printHandCard(true);
             else
@@ -210,7 +208,7 @@ public class BlackJackTable implements Table {
         System.out.println("========================================");
     }
 
-    private int standAction(BlackJackPlayer p) {
+    private int standAction(TriantaEnaPlayer p) {
         // after the player stand, use this method to do the following work
         if (!p.isOver())
             return 0;

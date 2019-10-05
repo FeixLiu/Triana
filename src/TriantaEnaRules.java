@@ -1,7 +1,7 @@
 import java.util.List;
 
-public class BlackJackRules implements Rules{
-	public BlackJackRules() {
+public class TriantaEnaRules implements Rules{
+	public TriantaEnaRules() {
 		
 	}
 	public int checkWin() {
@@ -31,7 +31,7 @@ public class BlackJackRules implements Rules{
 		return max == 0 ? 32 : max;
 	}
 	
-	public int checkWin(BlackJackPlayer P, CardPlayer D, int which) {
+	public int checkWin(TriantaEnaPlayer P, CardPlayer D, int which) {
 		// check who wins
 		if (!checkBust(P, which) && !checkBust(D, 0)) {
 			if (checkTotal(P, which)>checkTotal(D, 0)) {

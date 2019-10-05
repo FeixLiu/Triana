@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlackJackPlayer extends CardPlayer{
+public class TriantaEnaPlayer extends CardPlayer{
 
 	private int which = 0;
 	private int total = 1;
@@ -9,9 +9,9 @@ public class BlackJackPlayer extends CardPlayer{
 	private Wallet wallet = new Wallet();
 	private int role;
 	
-	public BlackJackPlayer() {}
+	public TriantaEnaPlayer() {}
 	
-	public BlackJackPlayer(String name, int role, int money) {
+	public TriantaEnaPlayer(String name, int role, int money) {
 		super(name);
 		this.role = role;
 		wallet.setWallet(money);
@@ -182,7 +182,7 @@ public class BlackJackPlayer extends CardPlayer{
 		
 	}
 	
-	public void endGame(int result, BlackJackPlayer dealer) {
+	public void endGame(int result, TriantaEnaPlayer dealer) {
 		//get the result of the index hand of card
 		switch(result) {
 			case Config.PLAYERWIN: {
