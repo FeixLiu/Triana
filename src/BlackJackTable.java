@@ -37,7 +37,7 @@ public class BlackJackTable implements Table {
         int random = (int)(Math.random() * all);
         for (int i = 0; i < playerNum; i++) {
             if (i == random) {
-                dealer = new BlackJackPlayer(allName.get(i), Config.BANKER, Config.DEFAULTMONEY);
+                dealer = new BlackJackPlayer(allName.get(i), Config.BANKER, Config.DEALERDEFAULTMONEY);
                 System.out.println(allName.get(i) + " you are the banker.");
             }
             else

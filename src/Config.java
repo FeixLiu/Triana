@@ -30,4 +30,5 @@ public class Config {
 	public static final int MAKEBET = 2;
 
 	public static final int DEFAULTMONEY = 200;
+	public static final int DEALERDEFAULTMONEY = 600;
 }
