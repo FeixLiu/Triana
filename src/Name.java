@@ -5,11 +5,14 @@ public class Name {
 	private String lastName;
 	private String nickName;
 
-	public Name() {
+	public Name(String nick) {
 		/*firstName = Config.DEFAULT_FNAME;
 		middleName = Config.DEFAULT_MNAME;
-		lastName = Config.DEFAULT_LNAME;
-		nickName = Config.DEFAULT_NNAME;*/
+		lastName = Config.DEFAULT_LNAME;*/
+		nickName = nick;
+	}
+	public void setNickName(String nname) {
+		nickName = nname;
 	}
 	
 	public void setName(String fname, String mname, String lname, String nname) {
@@ -17,6 +20,10 @@ public class Name {
 		middleName = mname;
 		lastName = lname;
 		nickName = nname;
+	}
+	
+	public String getNickName() {
+		return nickName;
 	}
 	
 	public String[] getName() {
