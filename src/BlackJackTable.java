@@ -59,11 +59,12 @@ public class BlackJackTable implements Table {
             playerNum = players.size();
             shuffle.newShuffle();
             shuffle.giveOneCard(dealer,0);
-            dealer.printHandCard(true);
+            
             for (BlackJackPlayer player : players) {
                 shuffle.giveOneCard(player, 0);
             }
             for (BlackJackPlayer player : players) {
+            	dealer.printHandCard(true);
                 for (BlackJackPlayer other : players) {
                     if (player.equals(other))
                         other.printHandCard(true);

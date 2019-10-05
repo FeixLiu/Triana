@@ -90,7 +90,7 @@ public class BlackJackPlayer extends CardPlayer{
 				case Config.HITACTION:
 					return Config.HITACTION;
 				case Config.STANDACTION: {
-					which++;
+//					which++;
 					return Config.STANDACTION;
 				}
 				case Config.SPLITACTION:{
