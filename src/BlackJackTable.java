@@ -25,19 +25,22 @@ public class BlackJackTable implements Table {
         shuffle = new Shuffle(Config.CARDSET);
         check = new BlackJackRules();
         String str;
+        List<String> allName = new ArrayList<>();
+        for (int i = 0; i < playerNum; i++) {
+            System.out.print("Please input the name of person " + (all - playerNum + 1) + ".");
+            str = Utils.getName();
+            allName.add(str);
+        }
         // random banker
-        while (playerNum > 0) {
-            System.out.print("The information of player " + (all - playerNum + 1) + ". ");
-            str = Utils.getName("player");
-            players.add(new BlackJackPlayer(str, Config.PLAYER, Config.DEFAULTMONEY));
-            playerNum--;
+        int random = (int)(Math.random() * all);
+        for (int i = 0; i < playerNum; i++) {
+            if (i == random)
+                dealer = new BlackJackPlayer(allName.get(i), Config.BANKER, Config.DEFAULTMONEY);
+            else
+                players.add(new BlackJackPlayer(allName.get(i), Config.PLAYER, Config.DEFAULTMONEY));
         }
-        System.out.print("The information of dealer " + (all - playerNum + 1) + ". ");
-        str = Utils.getName("dealer");
-        dealer = new BlackJackPlayer(str, Config.BANKER, Config.DEFAULTMONEY);
-        if (this.playerNum <= 0) {
+        if (this.playerNum <= 0)
             System.out.println("See you");
-        }
         computer = false;
         flag = true;
     }
@@ -143,8 +146,8 @@ public class BlackJackTable implements Table {
 
     private void print(BlackJackPlayer p) {
         //give one card to the player and then print the hand cards
-        dealer.printDealerHandCard();
-        p.printHandCard();
+        dealer.printHandCard(true);
+        p.printHandCard(true);
     }
 
     private int standAction(BlackJackPlayer p) {

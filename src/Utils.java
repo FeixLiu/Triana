@@ -3,10 +3,10 @@ import java.util.Scanner;
 public class Utils {
 	private static Scanner scanner = new Scanner(System.in);
 	
-	public static String getName(String name) {
+	public static String getName() {
 		String str;
 		do {
-			System.out.print("What's " + name + "'s name: ");
+			System.out.print("What's your name: ");
 			str = scanner.nextLine();
 		} while (str.length() == 0);
 		return str;
