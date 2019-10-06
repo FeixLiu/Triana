@@ -46,25 +46,4 @@ public class Shuffle {
         mask[a] = 1;
         p.giveCard(cards[a], which);
     }
-
-    public void keepGive(TriantaEnaPlayer dealer) {
-        // keep give dealer cards if dealer's hand cards' value is less than 17
-        while (max(dealer.getHandCard().get(0)) < 27)
-            giveOneCard(dealer, 0);
-    }
-
-    private int max(HandCard a) {
-        // get the max value of the possible value of the hand cards
-        int[] value = a.getValue();
-        if (value.length == 1)
-            return value[0];
-        else {
-            int b = value[0];
-            int c = value[1];
-            if (c <= 31)
-                return c;
-            else
-                return b;
-        }
-    }
 }

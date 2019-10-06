@@ -25,7 +25,10 @@ public class Config {
 	
 	public static final int PLAYER = 0;
 	public static final int BANKER = 1;
-	
+
+	public static final int DEALERMIN = 27;
+	public static final int UPBOUND = 31;
+
 	public static final int NOENOUGHMONEY = 0;
 	public static final int NOTMAKEBET = 1;
 	public static final int MAKEBET = 2;

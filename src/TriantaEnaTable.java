@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TriantaEnaTable implements Table {
-    private Shuffle shuffle;
+    private TriantaEnaShuffle shuffle;
     private TriantaEnaRules check;
     private List<TriantaEnaPlayer> players;
     private TriantaEnaPlayer dealer;
@@ -22,7 +22,7 @@ public class TriantaEnaTable implements Table {
         }
         int all = playerNum;
     	players = new ArrayList<>();
-        shuffle = new Shuffle(Config.CARDSET);
+        shuffle = new TriantaEnaShuffle(Config.CARDSET, Config.DEALERMIN, Config.UPBOUND);
         check = new TriantaEnaRules();
         String str;
         List<String> allName = new ArrayList<>();
