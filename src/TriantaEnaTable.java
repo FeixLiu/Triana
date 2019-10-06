@@ -137,6 +137,13 @@ public class TriantaEnaTable implements Table {
             }
             playing.clear();
             changeRole();
+            List<TriantaEnaPlayer> no_money = new ArrayList<>();
+            for (TriantaEnaPlayer p : players) {
+                if (p.getWallet().getMoney() <= 0)
+                    no_money.add(p);
+            }
+            for (TriantaEnaPlayer p : no_money)
+                players.remove(p);
         }
         if (playerNum > 0)
             printResult();
