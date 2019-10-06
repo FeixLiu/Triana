@@ -42,6 +42,7 @@ public class CardPlayer extends Person{
 	}
 	
 	public void printHandCard(boolean printAll) {
+		// print player's hand card
 		for(int i = 0; i < handCard.size(); i++) {
 			List<Card> cards = handCard.get(i).getCards();
 			if(handCard.size() == 1) {
