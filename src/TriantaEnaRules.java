@@ -9,7 +9,7 @@ public class TriantaEnaRules implements Rules{
 	}
 	
 	public boolean checkBust(CardPlayer P, int which) {
-        // check if the hand cards of each person is greater than 21 or not 
+        // check if the hand cards of each person is greater than 31 or not 
 		List<HandCard> hc = P.getHandCard();
 		int[] v = hc.get(which).getValue();
 		for (int i : v) {
@@ -72,7 +72,7 @@ public class TriantaEnaRules implements Rules{
 	}
 
 	public boolean isNatualTriantaEna(List<Card> cards) {
-		//test whether the hand cards is black jack or not
+		//test whether the hand cards is natural Trianta Ena or not
 		if (cards.size() != 3)
 			return false;
 		Card a = cards.get(0);
@@ -88,6 +88,7 @@ public class TriantaEnaRules implements Rules{
 	}
 
 	public boolean isTongHuaShun(List<Card> cards) {
+		//check if the hand cards is in same suit and with a total of 14
 		int total = 0;
 		String temp = "";
 		for (Card card : cards) {

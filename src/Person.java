@@ -1,5 +1,6 @@
 
 public class Person {
+	//define a normal person with name
 	private Name name;
 	
 	public Person() {}

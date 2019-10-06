@@ -1,5 +1,6 @@
 
 public class Name {
+	//define a person's name
 	private String firstName;
 	private String middleName;
 	private String lastName;
