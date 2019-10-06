@@ -51,7 +51,7 @@ public class HandCard {
         return a.getValue() > 10 && b.getValue() == 1;
     }
     
-    public boolean isTriantaEna() {
+    public boolean isNatualTriantaEna() {
         //test whether the hand cards is black jack or not
         if (cards.size() != 3)
             return false;
@@ -64,31 +64,22 @@ public class HandCard {
             return true;
         if (a.getValue() > 10 && b.getValue() == 1 && c.getValue() > 10)
             return true;
-        if (a.getValue() > 10 && b.getValue() > 10 && c.getValue() == 1)
-            return true;
-        return false;
+        return a.getValue() > 10 && b.getValue() > 10 && c.getValue() == 1;
     }
     
-    public boolean isTianHu() {
+    public boolean isTongHuaShun() {
     	int total = 0;
-    	String temp = new String("");
-    	String empty = new String("");
+    	String temp = "";
     	for (Card card : cards) {
             total = total + card.getValue();
-            if (temp.equals(empty)) {
+            if (temp.equals("")) {
             	temp = card.getSuit();
             }
-            else if(card.getSuit().equals(temp)){
-            	temp = card.getSuit();
-            }
-            else {
+            else if(!card.getSuit().equals(temp)) {
             	return false;
             }
         }
-    	if (total==14 && !temp.equals(empty)) {
-    		return true;
-    	}
-    	return false;
+        return total == 14;
     }
 
     public List<Card> getCards() {

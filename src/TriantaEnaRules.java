@@ -40,17 +40,17 @@ public class TriantaEnaRules implements Rules{
 			if (checkTotal(P, which)==checkTotal(D, 0)) {
 				if (checkTotal(P, which) < 31)
 					return Config.DEALERWIN;
-				if (P.getHandCard().get(which).isTianHu() && D.getHandCard().get(0).isTianHu())
+				if (P.getHandCard().get(which).isTongHuaShun() && D.getHandCard().get(0).isTongHuaShun())
 					return Config.DEALERWIN;
-				if (P.getHandCard().get(which).isTianHu())
+				if (P.getHandCard().get(which).isTongHuaShun())
 					return Config.PLAYERWIN;
-				if (D.getHandCard().get(0).isTianHu())
+				if (D.getHandCard().get(0).isTongHuaShun())
 					return Config.DEALERWIN;
-				if (P.getHandCard().get(which).isTriantaEna() && D.getHandCard().get(0).isTriantaEna())
+				if (P.getHandCard().get(which).isNatualTriantaEna() && D.getHandCard().get(0).isNatualTriantaEna())
 					return Config.DEALERWIN;
-				if (P.getHandCard().get(which).isTriantaEna())
+				if (P.getHandCard().get(which).isNatualTriantaEna())
 					return Config.PLAYERWIN;
-				if (D.getHandCard().get(0).isTriantaEna())
+				if (D.getHandCard().get(0).isNatualTriantaEna())
 					return Config.DEALERWIN;
 				return Config.DEALERWIN;
 			}

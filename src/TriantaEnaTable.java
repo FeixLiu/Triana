@@ -143,7 +143,7 @@ public class TriantaEnaTable implements Table {
     }
 
     private void printMoney() {
-        System.out.println("Dealer's money: " + dealer.getWallet().getMoney());
+        System.out.println("Banker's money: " + dealer.getWallet().getMoney());
         for (TriantaEnaPlayer p : players)
             System.out.println(p.getNickName() + "'s money: " + p.getWallet().getMoney());
     }
