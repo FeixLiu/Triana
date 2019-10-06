@@ -40,17 +40,23 @@ public class TriantaEnaRules implements Rules{
 			if (checkTotal(P, which)==checkTotal(D, 0)) {
 				if (checkTotal(P, which) < 31)
 					return Config.DEALERWIN;
-				if (P.getHandCard().get(which).isTongHuaShun() && D.getHandCard().get(0).isTongHuaShun())
+				List<Card> p = P.getHandCard().get(which).getCards();
+				List<Card> d = P.getHandCard().get(which).getCards();
+				boolean pt = isTongHuaShun(p);
+				boolean dt = isTongHuaShun(d);
+				boolean pn = isNatualTriantaEna(p);
+				boolean dn = isNatualTriantaEna(d);
+				if (pt && dt)
 					return Config.DEALERWIN;
-				if (P.getHandCard().get(which).isTongHuaShun())
+				if (pt)
 					return Config.PLAYERWIN;
-				if (D.getHandCard().get(0).isTongHuaShun())
+				if (dt)
 					return Config.DEALERWIN;
-				if (P.getHandCard().get(which).isNatualTriantaEna() && D.getHandCard().get(0).isNatualTriantaEna())
+				if (pn && dn)
 					return Config.DEALERWIN;
-				if (P.getHandCard().get(which).isNatualTriantaEna())
+				if (pn)
 					return Config.PLAYERWIN;
-				if (D.getHandCard().get(0).isNatualTriantaEna())
+				if (dn)
 					return Config.DEALERWIN;
 				return Config.DEALERWIN;
 			}
@@ -65,5 +71,34 @@ public class TriantaEnaRules implements Rules{
 		}
 	}
 
-	
+	public boolean isNatualTriantaEna(List<Card> cards) {
+		//test whether the hand cards is black jack or not
+		if (cards.size() != 3)
+			return false;
+		Card a = cards.get(0);
+		Card b = cards.get(1);
+		Card c = cards.get(2);
+		if (a.getValue() > 1 && a.getValue() <= 10)
+			return false;
+		if (a.getValue() == 1 && b.getValue() > 10 && c.getValue() > 10)
+			return true;
+		if (a.getValue() > 10 && b.getValue() == 1 && c.getValue() > 10)
+			return true;
+		return a.getValue() > 10 && b.getValue() > 10 && c.getValue() == 1;
+	}
+
+	public boolean isTongHuaShun(List<Card> cards) {
+		int total = 0;
+		String temp = "";
+		for (Card card : cards) {
+			total = total + card.getValue();
+			if (temp.equals("")) {
+				temp = card.getSuit();
+			}
+			else if(!card.getSuit().equals(temp)) {
+				return false;
+			}
+		}
+		return total == 14;
+	}
 }

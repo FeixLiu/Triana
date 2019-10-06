@@ -80,7 +80,7 @@ public class TriantaEnaTable implements Table {
                 }
                 else if (a == Config.MAKEBET){
                     playing.add(player);
-                    shuffle.giveNewCard(player);
+                    shuffle.giveNewCard(player, 2);
                 }
             }
             if (playing.size() == 0) {

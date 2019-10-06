@@ -19,10 +19,6 @@ public class Shuffle {
             mask[i] = 0;
     }
 
-    public Shuffle() {
-        this(1);
-    }
-
     public void newShuffle() {
         int sum = 0;
         for (int value : mask)
@@ -31,10 +27,12 @@ public class Shuffle {
             IntStream.range(0, mask.length).forEach(i -> mask[i] = 0);
     }
 
-    public void giveNewCard(CardPlayer p) {
+    public void giveNewCard(CardPlayer p, int times) {
         // at the start of the game, give the dealer and player two cards
-        giveOneCard(p, 0);
-        giveOneCard(p, 0);
+        while (times > 0) {
+            times--;
+            giveOneCard(p, 0);
+        }
     }
 
     public void giveOneCard(CardPlayer p, int which) {
