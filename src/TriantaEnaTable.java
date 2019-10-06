@@ -33,9 +33,11 @@ public class TriantaEnaTable implements Table {
         }
         // random banker
         int random = (int)(Math.random() * all);
-        System.out.print("Please input the money for all player (default 200, please make sure you have more than 10): ");
+        System.out.print("Please input the money for all player (default 200, please" +
+                " make sure you have more than 10): ");
         int playerMoney = Utils.getMoney(-1);
-        System.out.print("Please input the money for all banker (default 200, please make sure you have more than 10): ");
+        System.out.print("Please input the money for all banker (default 3 times of player's money, " +
+                "please make sure you have more than 10): ");
         int bankerMoney = Utils.getMoney(playerMoney);
         for (int i = 0; i < playerNum; i++) {
             if (i == random) {
