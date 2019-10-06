@@ -16,7 +16,7 @@ public class TriantaEnaTable implements Table {
     	System.out.println("Or a hand that has a card value greater than your opponents without exceeding 31.");
         int playerNum = 11;
         while ((playerNum > Config.MAXPLAYER || playerNum < Config.MINPLAYER) && playerNum != 0) {
-            System.out.print("How many people in the game (include banker)? ");
+            System.out.print("How many people in the game (include banker, no more than 10)? ");
             playerNum = Utils.getNumberFromPlayer();
             this.playerNum = playerNum;
         }
@@ -27,16 +27,16 @@ public class TriantaEnaTable implements Table {
         String str;
         List<String> allName = new ArrayList<>();
         for (int i = 0; i < playerNum; i++) {
-            System.out.print("Please input the name of person " + (i + 1) + ".");
+            System.out.print("Please input the name of person " + (i + 1) + ". ");
             str = Utils.getName();
             allName.add(str);
         }
         // random banker
         int random = (int)(Math.random() * all);
-        System.out.print("Please input the money for all player (default 200, please" +
+        System.out.print("Please input the money for all players (default 200, please" +
                 " make sure you have more than 10): ");
         int playerMoney = Utils.getMoney(-1);
-        System.out.print("Please input the money for all banker (default 3 times of player's money, " +
+        System.out.print("Please input the money for banker (default 3 times of player's money, " +
                 "please make sure you have more than 10): ");
         int bankerMoney = Utils.getMoney(playerMoney);
         for (int i = 0; i < playerNum; i++) {
