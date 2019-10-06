@@ -23,8 +23,10 @@ public class Shuffle {
         int sum = 0;
         for (int value : mask)
             sum += value;
-        if (sum >= Config.CARDNUM)
-            IntStream.range(0, mask.length).forEach(i -> mask[i] = 0);
+        if (sum >= Config.CARDNUM - 1){
+            for (int i = 0; i < mask.length; i++)
+                mask[i] = 0;
+        }
     }
 
     public void giveNewCard(CardPlayer p, int times) {
