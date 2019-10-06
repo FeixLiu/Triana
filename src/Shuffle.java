@@ -39,10 +39,9 @@ public class Shuffle {
 
     public void giveOneCard(CardPlayer p, int which) {
         // give one card to p
-        int a = (int)(Math.random() * (Config.CARDNUM));
-        while (mask[a] == 1) {
-            a = (int)(Math.random() * (Config.CARDNUM));
-        }
+        int a = (int)(Math.random() * (Config.CARDNUM * Config.CARDSET));
+        while (mask[a] == 1)
+            a++;
         mask[a] = 1;
         p.giveCard(cards[a], which);
     }

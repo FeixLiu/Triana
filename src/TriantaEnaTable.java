@@ -84,8 +84,8 @@ public class TriantaEnaTable implements Table {
                 }
             }
             if (playing.size() == 0) {
-                System.out.println("See you");
-                break;
+                askNewGame();
+                continue;
             }
             for (TriantaEnaPlayer player : playing) {
                 print(player);
@@ -122,18 +122,7 @@ public class TriantaEnaTable implements Table {
                     for (int i = 0; i < player.getHandCard().size(); i++)
                         player.endGame(check.checkWin(player, dealer, i), dealer);
                 printMoney();
-                List<TriantaEnaPlayer> temp = new ArrayList<>();
-                for (TriantaEnaPlayer player : players) {
-                    System.out.print(player.getNickName() + ", do you want to play another game? ");
-                    char c = Utils.yesOrNo();
-                    if (c != 'y' && c != 'Y') {
-                        temp.add(player);
-                        System.out.print(player.getNickName() + "'s balance in wallet is: ");
-                        System.out.println(player.getWallet().getMoney());
-                    }
-                }
-                for (TriantaEnaPlayer out : temp)
-                    players.remove(out);
+                askNewGame();
             }
             playing.clear();
             changeRole();
@@ -147,6 +136,21 @@ public class TriantaEnaTable implements Table {
         }
         if (playerNum > 0)
             printResult();
+    }
+
+    private void askNewGame() {
+        List<TriantaEnaPlayer> temp = new ArrayList<>();
+        for (TriantaEnaPlayer player : players) {
+            System.out.print(player.getNickName() + ", do you want to play another game? ");
+            char c = Utils.yesOrNo();
+            if (c != 'y' && c != 'Y') {
+                temp.add(player);
+                System.out.print(player.getNickName() + "'s balance in wallet is: ");
+                System.out.println(player.getWallet().getMoney());
+            }
+        }
+        for (TriantaEnaPlayer out : temp)
+            players.remove(out);
     }
 
     private void printMoney() {

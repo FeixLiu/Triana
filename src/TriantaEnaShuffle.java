@@ -9,8 +9,8 @@ public class TriantaEnaShuffle extends Shuffle {
     }
 
     public void keepGive(TriantaEnaPlayer dealer) {
-        // keep give dealer cards if dealer's hand cards' value is less than 17
-        while (max(dealer.getHandCard().get(0)) < dealerMin)
+        // keep give dealer cards if dealer's hand cards' value is less than 27
+        while (max(dealer.getHandCard().get(0)) <= dealerMin)
             giveOneCard(dealer, 0);
     }
 
