@@ -41,7 +41,7 @@ public class Shuffle {
         // give one card to p
         int a = (int)(Math.random() * (Config.CARDNUM * Config.CARDSET));
         while (mask[a] == 1)
-        	a=(a+1)%(Config.CARDSET*Config.CARDNUM);
+            a = (a + 1) % (Config.CARDNUM * Config.CARDSET);
         mask[a] = 1;
         p.giveCard(cards[a], which);
     }
