@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TriantaEnaPlayer extends CardPlayer{
-
+	// the player and banker for TriantaEna
 	private int which = 0;
 	private int total = 1;
 	private List<Bet> bet = new ArrayList<Bet>();
