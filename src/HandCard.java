@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HandCard {
+	//hand card of player
     protected List<Card> cards;
 
     public HandCard() {

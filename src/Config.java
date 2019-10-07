@@ -1,6 +1,6 @@
 
 public class Config {
-
+	//define some constant of the project
 	public static final int MAXBET = 100;
 	public static final int MINBET = 10;
 	

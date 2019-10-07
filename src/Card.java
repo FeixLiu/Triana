@@ -1,4 +1,5 @@
 public class Card {
+	//define a set of cards
     private String suit;
     private String number;
     private int value;

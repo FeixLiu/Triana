@@ -1,6 +1,7 @@
 import java.util.List;
 
 public class TriantaEnaRules implements Rules{
+	//define the rules of Trianta Ena game
 	public TriantaEnaRules() {
 		
 	}

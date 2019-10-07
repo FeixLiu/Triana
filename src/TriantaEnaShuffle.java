@@ -1,4 +1,5 @@
 public class TriantaEnaShuffle extends Shuffle {
+	//special shuffle for Trianta Ena game
     private int dealerMin;
     private int upbound;
 

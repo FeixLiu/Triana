@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardPlayer extends Person{
-	
+	//define a card player with name and hand cards
 	protected List<HandCard> handCard;
 
 	public CardPlayer(){
